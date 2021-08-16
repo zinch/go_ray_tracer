@@ -11,9 +11,9 @@ func Test_tuple_with_w_equal_1_is_a_point(t *testing.T) {
 	if !tuple.IsPoint() {
 		t.Fatalf("%v must be a point", tuple)
 	}
-    if tuple.IsVector() {
+	if tuple.IsVector() {
 		t.Fatalf("%v cannot be a vector", tuple)
-    }
+	}
 }
 
 func Test_tuple_with_w_equal_0_is_a_vector(t *testing.T) {
@@ -21,7 +21,7 @@ func Test_tuple_with_w_equal_0_is_a_vector(t *testing.T) {
 	if tuple.IsPoint() {
 		t.Fatalf("%v cannot be a point", tuple)
 	}
-    if !tuple.IsVector() {
+	if !tuple.IsVector() {
 		t.Fatalf("%v must be a vector", tuple)
-    }
+	}
 }
