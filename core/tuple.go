@@ -18,3 +18,7 @@ func (t Tuple) IsPoint() bool {
 func Point(x float32, y float32, z float32) Tuple {
 	return Tuple{X: x, Y: y, Z: z, W: 1}
 }
+
+func Vector(x float32, y float32, z float32) Tuple {
+	return Tuple{X: x, Y: y, Z: z, W: 0}
+}

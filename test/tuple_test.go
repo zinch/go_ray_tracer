@@ -36,3 +36,14 @@ func Test_point_creates_a_tuple_with_w_equal_1(t *testing.T) {
 		t.Fatalf("%v must be equal to %v", pt, expected)
 	}
 }
+
+func Test_vector_creates_a_tuple_with_w_equal_0(t *testing.T) {
+	pt := core.Vector(4, -4, 3)
+	expected := core.Tuple{X: 4, Y: -4, Z: 3, W: 0}
+	if !areEqual(pt.X, expected.X) ||
+		!areEqual(pt.Y, expected.Y) ||
+		!areEqual(pt.Z, expected.Z) ||
+		pt.W != expected.W {
+		t.Fatalf("%v must be equal to %v", pt, expected)
+	}
+}
