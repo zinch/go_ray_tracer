@@ -1,8 +1,8 @@
 package core
 
 type Tuple struct {
-    X int
-    Y int
-    Z int
+	X float32
+	Y float32
+	Z float32
     W int
 }
