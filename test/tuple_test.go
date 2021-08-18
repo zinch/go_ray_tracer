@@ -62,6 +62,14 @@ func Test_subtracting_a_vector_from_a_point(t *testing.T) {
 	with(t).assertThat(result).isEqualTo(expected)
 }
 
+func Test_subtracting_two_vectors(t *testing.T) {
+	t1 := core.Vector(3, 2, 1)
+	t2 := core.Vector(5, 6, 7)
+	result := t1.Minus(t2)
+	expected := core.Vector(-2, -4, -6)
+	with(t).assertThat(result).isEqualTo(expected)
+}
+
 func with(t *testing.T) Assert {
 	return Assert{Test: t}
 }
