@@ -41,3 +41,13 @@ func Test_vector_creates_a_tuple_with_w_equal_0(t *testing.T) {
 		t.Fatalf("%v must be equal to %v", tuple, expected)
 	}
 }
+
+func Test_adding_two_tuples(t *testing.T) {
+	t1 := core.Point(3, -2, 5)
+	t2 := core.Vector(-2, 3, 1)
+	result := t1.Plus(t2)
+	expected := core.Point(1, 1, 6)
+	if !result.Equals(expected) {
+		t.Fatalf("%v must be equal to %v", result, expected)
+	}
+}
