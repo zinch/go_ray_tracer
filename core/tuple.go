@@ -29,7 +29,11 @@ func (t Tuple) Plus(other Tuple) Tuple {
 }
 
 func (t Tuple) Minus(other Tuple) Tuple {
-	return Tuple{X: t.X - other.X, Y: t.Y - other.Y, Z: t.Z - other.Z, W: t.W - other.W}
+	return t.Plus(other.Negate())
+}
+
+func (t Tuple) Negate() Tuple {
+	return Tuple{X: -t.X, Y: -t.Y, Z: -t.Z, W: -t.W}
 }
 
 func Point(x float32, y float32, z float32) Tuple {

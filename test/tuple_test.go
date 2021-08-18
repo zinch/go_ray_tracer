@@ -70,6 +70,19 @@ func Test_subtracting_two_vectors(t *testing.T) {
 	with(t).assertThat(result).isEqualTo(expected)
 }
 
+func Test_subtracting_a_vector_from_the_zero_vector(t *testing.T) {
+	zero := core.Vector(0, 0, 0)
+	v := core.Vector(1, -2, 3)
+	result := zero.Minus(v)
+	expected := core.Vector(-1, 2, -3)
+	with(t).assertThat(result).isEqualTo(expected)
+}
+
+func Test_negating_a_tuple(t *testing.T) {
+	tuple := core.Tuple{X: 1, Y: -2, Z: 3, W: -4}
+	with(t).assertThat(tuple.Negate()).isEqualTo(core.Tuple{X: -1, Y: 2, Z: -3, W: 4})
+}
+
 func with(t *testing.T) Assert {
 	return Assert{Test: t}
 }
