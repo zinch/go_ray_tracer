@@ -51,3 +51,13 @@ func Test_adding_two_tuples(t *testing.T) {
 		t.Fatalf("%v must be equal to %v", result, expected)
 	}
 }
+
+func Test_subtracting_two_points(t *testing.T) {
+	t1 := core.Point(3, 2, 1)
+	t2 := core.Point(5, 6, 7)
+	result := t1.Minus(t2)
+	expected := core.Vector(-2, -4, -6)
+	if !result.Equals(expected) {
+		t.Fatalf("%v must be equal to %v", result, expected)
+	}
+}

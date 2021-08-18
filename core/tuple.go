@@ -28,6 +28,10 @@ func (t Tuple) Plus(other Tuple) Tuple {
 	return Tuple{X: t.X + other.X, Y: t.Y + other.Y, Z: t.Z + other.Z, W: t.W + other.W}
 }
 
+func (t Tuple) Minus(other Tuple) Tuple {
+	return Tuple{X: t.X - other.X, Y: t.Y - other.Y, Z: t.Z - other.Z, W: t.W - other.W}
+}
+
 func Point(x float32, y float32, z float32) Tuple {
 	return Tuple{X: x, Y: y, Z: z, W: 1}
 }
