@@ -29,7 +29,7 @@ func Test_tuple_with_w_equal_0_is_a_vector(t *testing.T) {
 func Test_point_creates_a_tuple_with_w_equal_1(t *testing.T) {
 	tuple := core.Point(4, -4, 3)
 	expected := core.Tuple{X: 4, Y: -4, Z: 3, W: 1}
-	if !core.AreEqual(tuple, expected) {
+	if !tuple.Equals(expected) {
 		t.Fatalf("%v must be equal to %v", tuple, expected)
 	}
 }
@@ -37,7 +37,7 @@ func Test_point_creates_a_tuple_with_w_equal_1(t *testing.T) {
 func Test_vector_creates_a_tuple_with_w_equal_0(t *testing.T) {
 	tuple := core.Vector(4, -4, 3)
 	expected := core.Tuple{X: 4, Y: -4, Z: 3, W: 0}
-	if !core.AreEqual(tuple, expected) {
+	if !tuple.Equals(expected) {
 		t.Fatalf("%v must be equal to %v", tuple, expected)
 	}
 }
