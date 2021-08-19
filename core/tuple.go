@@ -57,6 +57,10 @@ func (t Tuple) Normalize() Tuple {
 	return Tuple{X: t.X / magnitude, Y: t.Y / magnitude, Z: t.Z / magnitude, W: t.W / magnitude}
 }
 
+func (t Tuple) Dot(other Tuple) float64 {
+	return t.X*other.X + t.Y*other.Y + t.Z*other.Z + t.W*other.W
+}
+
 func Point(x float64, y float64, z float64) Tuple {
 	return Tuple{X: x, Y: y, Z: z, W: 1}
 }

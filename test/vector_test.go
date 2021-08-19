@@ -36,3 +36,9 @@ func Test_magnitude_of_a_normalized_vector_is_1(t *testing.T) {
 	vector := core.Vector(1, 2, 3)
 	test(t).that(vector.Normalize().Magnitude()).isEqualTo(1)
 }
+
+func Test_dot_product(t *testing.T) {
+	vec1 := core.Vector(1, 2, 3)
+	vec2 := core.Vector(2, 3, 4)
+	test(t).that(vec1.Dot(vec2)).isEqualTo(20)
+}
