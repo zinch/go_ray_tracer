@@ -97,3 +97,8 @@ func Test_dividing_a_tuple_by_a_scalar(t *testing.T) {
 	tuple := core.Tuple{X: 1, Y: -2, Z: 3, W: -4}
 	test(t).that(tuple.Divide(2)).isEqualTo(core.Tuple{X: 0.5, Y: -1, Z: 1.5, W: -2})
 }
+
+func Test_computing_the_magnitude_of_a_vector(t *testing.T) {
+	vector := core.Vector(1, 0, 0)
+	test(t).that(vector.Magnitude()).isEqualTo(1.0)
+}
