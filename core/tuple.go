@@ -1,6 +1,10 @@
 package core
 
-import "example.com/ray-tracer/math"
+import (
+	"math"
+
+	rayMath "example.com/ray-tracer/math"
+)
 
 type Tuple struct {
 	X float64
@@ -18,10 +22,10 @@ func (t Tuple) IsPoint() bool {
 }
 
 func (t Tuple) Equals(other Tuple) bool {
-	return math.AreEqual(t.X, other.X) &&
-		math.AreEqual(t.Y, other.Y) &&
-		math.AreEqual(t.Z, other.Z) &&
-		math.AreEqual(t.W, other.W)
+	return rayMath.AreEqual(t.X, other.X) &&
+		rayMath.AreEqual(t.Y, other.Y) &&
+		rayMath.AreEqual(t.Z, other.Z) &&
+		rayMath.AreEqual(t.W, other.W)
 }
 
 func (t Tuple) Plus(other Tuple) Tuple {
@@ -45,7 +49,7 @@ func (t Tuple) Divide(s float64) Tuple {
 }
 
 func (t Tuple) Magnitude() float64 {
-	return 1
+	return math.Sqrt(t.X*t.X + t.Y*t.Y + t.Z*t.Z + t.W*t.W)
 }
 
 func Point(x float64, y float64, z float64) Tuple {

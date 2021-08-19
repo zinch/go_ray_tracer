@@ -1,6 +1,7 @@
 package test
 
 import (
+	"math"
 	"testing"
 
 	"example.com/ray-tracer/core"
@@ -101,4 +102,16 @@ func Test_dividing_a_tuple_by_a_scalar(t *testing.T) {
 func Test_computing_the_magnitude_of_a_vector(t *testing.T) {
 	vector := core.Vector(1, 0, 0)
 	test(t).that(vector.Magnitude()).isEqualTo(1)
+
+	vector = core.Vector(0, 1, 0)
+	test(t).that(vector.Magnitude()).isEqualTo(1)
+
+	vector = core.Vector(0, 0, 1)
+	test(t).that(vector.Magnitude()).isEqualTo(1)
+
+	vector = core.Vector(1, 2, 3)
+	test(t).that(vector.Magnitude()).isEqualTo(math.Sqrt(14))
+
+	vector = core.Vector(-1, -2, -3)
+	test(t).that(vector.Magnitude()).isEqualTo(math.Sqrt(14))
 }
