@@ -82,3 +82,8 @@ func Test_negating_a_tuple(t *testing.T) {
 	tuple := core.Tuple{X: 1, Y: -2, Z: 3, W: -4}
 	test(t).that(tuple.Negate()).isEqualTo(core.Tuple{X: -1, Y: 2, Z: -3, W: 4})
 }
+
+func Test_multiplying_a_tuple_by_a_scalar(t *testing.T) {
+	tuple := core.Tuple{X: 1, Y: -2, Z: 3, W: -4}
+	test(t).that(tuple.Multiply(3.5)).isEqualTo(core.Tuple{X: 3.5, Y: -7, Z: 10.5, W: -14})
+}
