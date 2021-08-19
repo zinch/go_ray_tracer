@@ -52,6 +52,11 @@ func (t Tuple) Magnitude() float64 {
 	return math.Sqrt(t.X*t.X + t.Y*t.Y + t.Z*t.Z + t.W*t.W)
 }
 
+func (t Tuple) Normalize() Tuple {
+	magnitude := t.Magnitude()
+	return Tuple{X: t.X / magnitude, Y: t.Y / magnitude, Z: t.Z / magnitude, W: t.W / magnitude}
+}
+
 func Point(x float64, y float64, z float64) Tuple {
 	return Tuple{X: x, Y: y, Z: z, W: 1}
 }
