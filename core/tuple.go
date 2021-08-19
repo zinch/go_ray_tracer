@@ -40,6 +40,10 @@ func (t Tuple) Multiply(s float32) Tuple {
 	return Tuple{X: t.X * s, Y: t.Y * s, Z: t.Z * s, W: t.W * s}
 }
 
+func (t Tuple) Divide(s float32) Tuple {
+	return t.Multiply(1 / s)
+}
+
 func Point(x float32, y float32, z float32) Tuple {
 	return Tuple{X: x, Y: y, Z: z, W: 1}
 }
