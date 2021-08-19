@@ -52,7 +52,12 @@ type Float64Matcher struct {
 }
 
 func (matcher Float64Matcher) isEqualTo(value interface{}) {
-	expected := value.(float64)
+	var expected float64
+	if intVal, ok := value.(int); ok {
+		expected = float64(intVal)
+	} else {
+		expected = value.(float64)
+	}
 	t := matcher.Assert.Test
 	if !math.AreEqual(matcher.Value, expected) {
 		t.Fatalf("%f must be close to to %f", matcher.Value, expected)

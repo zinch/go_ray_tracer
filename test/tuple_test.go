@@ -100,5 +100,5 @@ func Test_dividing_a_tuple_by_a_scalar(t *testing.T) {
 
 func Test_computing_the_magnitude_of_a_vector(t *testing.T) {
 	vector := core.Vector(1, 0, 0)
-	test(t).that(vector.Magnitude()).isEqualTo(1.0)
+	test(t).that(vector.Magnitude()).isEqualTo(1)
 }
