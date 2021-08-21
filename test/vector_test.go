@@ -42,3 +42,10 @@ func Test_dot_product(t *testing.T) {
 	vec2 := core.Vector(2, 3, 4)
 	test(t).that(vec1.Dot(vec2)).isEqualTo(20)
 }
+
+func Test_cross_product(t *testing.T) {
+	vec1 := core.Vector(1, 2, 3)
+	vec2 := core.Vector(2, 3, 4)
+	test(t).that(vec1.Cross(vec2)).isEqualTo(core.Vector(-1, 2, -1))
+	test(t).that(vec2.Cross(vec1)).isEqualTo(core.Vector(1, -2, 1))
+}
