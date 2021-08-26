@@ -29,3 +29,9 @@ func Test_multiplying_color_by_scalar(t *testing.T) {
 	c := graphics.NewColor(0.2, 0.3, 0.4)
 	test(t).that(c.Multiply(2)).isEqualTo(graphics.NewColor(0.4, 0.6, 0.8))
 }
+
+func Test_blending_colors(t *testing.T) {
+	c1 := graphics.NewColor(1, 0.2, 0.4)
+	c2 := graphics.NewColor(0.9, 1, 0.1)
+	test(t).that(c1.BlendWith(c2)).isEqualTo(graphics.NewColor(0.9, 0.2, 0.04))
+}

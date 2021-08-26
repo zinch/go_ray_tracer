@@ -37,3 +37,7 @@ func (c Color) Multiply(s float64) Color {
 func (c Color) Equals(other Color) bool {
 	return c.t.Equals(other.t)
 }
+
+func (c Color) BlendWith(other Color) Color {
+	return NewColor(c.Red()*other.Red(), c.Green()*other.Green(), c.Blue()*other.Blue())
+}
