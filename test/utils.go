@@ -6,6 +6,7 @@ import (
 	"testing"
 
 	"example.com/ray-tracer/core"
+	"example.com/ray-tracer/graphics"
 	"example.com/ray-tracer/math"
 )
 
@@ -22,6 +23,9 @@ var tupleType = reflect.TypeOf((*core.Tuple)(nil))
 func (assert Assert) that(value interface{}) Matcher {
 	if tuple, ok := value.(core.Tuple); ok {
 		return TupleMatcher{Assert: assert, Tuple: tuple}
+	}
+	if color, ok := value.(graphics.Color); ok {
+		return ColorMatcher{Assert: assert, Color: color}
 	}
 	if number, ok := value.(float64); ok {
 		return Float64Matcher{Assert: assert, Value: number}
@@ -61,5 +65,18 @@ func (matcher Float64Matcher) isEqualTo(value interface{}) {
 	t := matcher.Assert.Test
 	if !math.AreEqual(matcher.Value, expected) {
 		t.Fatalf("%f must be close to to %f", matcher.Value, expected)
+	}
+}
+
+type ColorMatcher struct {
+	Assert
+	Color graphics.Color
+}
+
+func (matcher ColorMatcher) isEqualTo(value interface{}) {
+	expected := value.(graphics.Color)
+	t := matcher.Assert.Test
+	if !matcher.Color.Equals(expected) {
+		t.Fatalf("%v must be equal to %v", matcher.Color, expected)
 	}
 }
