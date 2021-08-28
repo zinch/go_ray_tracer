@@ -27,7 +27,7 @@ func Test_tuple_with_w_equal_0_is_a_vector(t *testing.T) {
 }
 
 func Test_point_creates_a_tuple_with_w_equal_1(t *testing.T) {
-	result := core.Point(4, -4, 3)
+	result := core.NewPoint(4, -4, 3)
 	expected := core.Tuple{X: 4, Y: -4, Z: 3, W: 1}
 	test(t).that(result).isEqualTo(expected)
 }
@@ -39,26 +39,26 @@ func Test_vector_creates_a_tuple_with_w_equal_0(t *testing.T) {
 }
 
 func Test_adding_two_tuples(t *testing.T) {
-	t1 := core.Point(3, -2, 5)
+	t1 := core.NewPoint(3, -2, 5)
 	t2 := core.NewVector(-2, 3, 1)
 	result := t1.Plus(t2)
-	expected := core.Point(1, 1, 6)
+	expected := core.NewPoint(1, 1, 6)
 	test(t).that(result).isEqualTo(expected)
 }
 
 func Test_subtracting_two_points(t *testing.T) {
-	t1 := core.Point(3, 2, 1)
-	t2 := core.Point(5, 6, 7)
+	t1 := core.NewPoint(3, 2, 1)
+	t2 := core.NewPoint(5, 6, 7)
 	result := t1.Minus(t2)
 	expected := core.NewVector(-2, -4, -6)
 	test(t).that(result).isEqualTo(expected)
 }
 
 func Test_subtracting_a_vector_from_a_point(t *testing.T) {
-	t1 := core.Point(3, 2, 1)
+	t1 := core.NewPoint(3, 2, 1)
 	t2 := core.NewVector(5, 6, 7)
 	result := t1.Minus(t2)
-	expected := core.Point(-2, -4, -6)
+	expected := core.NewPoint(-2, -4, -6)
 	test(t).that(result).isEqualTo(expected)
 }
 

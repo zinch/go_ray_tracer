@@ -69,7 +69,7 @@ func (t Tuple) Cross(other Tuple) Tuple {
 	)
 }
 
-func Point(x float64, y float64, z float64) Tuple {
+func NewPoint(x float64, y float64, z float64) Tuple {
 	return Tuple{X: x, Y: y, Z: z, W: 1}
 }
 
