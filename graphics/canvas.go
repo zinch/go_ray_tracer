@@ -1,24 +1,44 @@
 package graphics
 
-type Canvas struct {
+import (
+	"bufio"
+	"io"
+)
+
+type canvas struct {
 	Width  int
 	Height int
 	colors []Color
 }
 
-func NewCanvas(width int, height int) Canvas {
+func NewCanvas(width int, height int) canvas {
 	colors := make([]Color, width*height)
-	return Canvas{width, height, colors}
+	return canvas{width, height, colors}
 }
 
-func (canvas *Canvas) WritePixel(x int, y int, color Color) {
-	canvas.colors[canvas.pixelIndex(x, y)] = color
+func (c *canvas) WritePixel(x int, y int, color Color) {
+	c.colors[c.pixelIndex(x, y)] = color
 }
 
-func (canvas *Canvas) PixelAt(x int, y int) Color {
-	return canvas.colors[canvas.pixelIndex(x, y)]
+func (c *canvas) PixelAt(x int, y int) Color {
+	return c.colors[c.pixelIndex(x, y)]
 }
 
-func (canvas *Canvas) pixelIndex(x int, y int) int {
-	return x*canvas.Width + y
+func (c *canvas) pixelIndex(x int, y int) int {
+	return x*c.Width + y
+}
+
+func (c *canvas) ToPPM(out io.Writer) (err error) {
+	writer := bufio.NewWriter(out)
+	defer func() {
+		if err == nil {
+			err = writer.Flush()
+		}
+	}()
+
+	if _, err = writer.WriteString("P3"); err != nil {
+		return err
+	}
+
+	return nil
 }
