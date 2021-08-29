@@ -29,7 +29,7 @@ func (t Tuple) Equals(other Tuple) bool {
 }
 
 func (t Tuple) Plus(other Tuple) Tuple {
-	return Tuple{X: t.X + other.X, Y: t.Y + other.Y, Z: t.Z + other.Z, W: t.W + other.W}
+	return Tuple{t.X + other.X, t.Y + other.Y, t.Z + other.Z, t.W + other.W}
 }
 
 func (t Tuple) Minus(other Tuple) Tuple {
@@ -41,7 +41,7 @@ func (t Tuple) Negate() Tuple {
 }
 
 func (t Tuple) Multiply(s float64) Tuple {
-	return Tuple{X: t.X * s, Y: t.Y * s, Z: t.Z * s, W: t.W * s}
+	return Tuple{t.X * s, t.Y * s, t.Z * s, t.W * s}
 }
 
 func (t Tuple) Divide(s float64) Tuple {
@@ -54,7 +54,7 @@ func (t Tuple) Magnitude() float64 {
 
 func (t Tuple) Normalize() Tuple {
 	magnitude := t.Magnitude()
-	return Tuple{X: t.X / magnitude, Y: t.Y / magnitude, Z: t.Z / magnitude, W: t.W / magnitude}
+	return Tuple{t.X / magnitude, t.Y / magnitude, t.Z / magnitude, t.W / magnitude}
 }
 
 func (t Tuple) Dot(other Tuple) float64 {
@@ -70,9 +70,9 @@ func (t Tuple) Cross(other Tuple) Tuple {
 }
 
 func NewPoint(x float64, y float64, z float64) Tuple {
-	return Tuple{X: x, Y: y, Z: z, W: 1}
+	return Tuple{x, y, z, 1}
 }
 
 func NewVector(x float64, y float64, z float64) Tuple {
-	return Tuple{X: x, Y: y, Z: z, W: 0}
+	return Tuple{x, y, z, 0}
 }
