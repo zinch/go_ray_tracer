@@ -37,11 +37,11 @@ func (c *canvas) ToPPM(out io.Writer) (err error) {
 		}
 	}()
 
-	if _, err = writer.WriteString("P3\n"); err != nil {
-		return err
-	}
+	header := `P3
+%d %d
+255`
 
-	if _, err = writer.WriteString(fmt.Sprintf("%d %d", c.Width, c.Height)); err != nil {
+	if _, err = writer.WriteString(fmt.Sprintf(header, c.Width, c.Height)); err != nil {
 		return err
 	}
 

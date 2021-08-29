@@ -25,6 +25,7 @@ func Test_saving_in_PPM_format(t *testing.T) {
 	var buf bytes.Buffer
 	c.ToPPM(&buf)
 	expected := `P3
-5 3`
+5 3
+255`
 	test(t).that(buf.String()).isEqualTo(expected)
 }
