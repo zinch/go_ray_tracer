@@ -22,16 +22,19 @@ var tupleType = reflect.TypeOf((*core.Tuple)(nil))
 
 func (assert Assert) that(value interface{}) Matcher {
 	if tuple, ok := value.(core.Tuple); ok {
-		return TupleMatcher{Assert: assert, Tuple: tuple}
+		return TupleMatcher{Assert: assert, Value: tuple}
 	}
 	if color, ok := value.(graphics.Color); ok {
-		return ColorMatcher{Assert: assert, Color: color}
+		return ColorMatcher{Assert: assert, Value: color}
 	}
 	if number, ok := value.(float64); ok {
 		return Float64Matcher{Assert: assert, Value: number}
 	}
 	if number, ok := value.(int); ok {
 		return IntMatcher{Assert: assert, Value: number}
+	}
+	if str, ok := value.(string); ok {
+		return StringMatcher{Assert: assert, Value: str}
 	}
 	panic(fmt.Sprintf("%s does not have a matcher", reflect.TypeOf(value).Name()))
 }
@@ -42,14 +45,14 @@ type Matcher interface {
 
 type TupleMatcher struct {
 	Assert
-	Tuple core.Tuple
+	Value core.Tuple
 }
 
 func (matcher TupleMatcher) isEqualTo(value interface{}) {
 	expected := value.(core.Tuple)
 	t := matcher.Assert.Test
-	if !matcher.Tuple.Equals(expected) {
-		t.Fatalf("%v must be equal to %v", matcher.Tuple, expected)
+	if !matcher.Value.Equals(expected) {
+		t.Fatalf("%v must be equal to %v", matcher.Value, expected)
 	}
 }
 
@@ -92,13 +95,26 @@ func (matcher IntMatcher) isEqualTo(value interface{}) {
 
 type ColorMatcher struct {
 	Assert
-	Color graphics.Color
+	Value graphics.Color
 }
 
 func (matcher ColorMatcher) isEqualTo(value interface{}) {
 	expected := value.(graphics.Color)
 	t := matcher.Assert.Test
-	if !matcher.Color.Equals(expected) {
-		t.Fatalf("%v must be equal to %v", matcher.Color, expected)
+	if !matcher.Value.Equals(expected) {
+		t.Fatalf("%v must be equal to %v", matcher.Value, expected)
+	}
+}
+
+type StringMatcher struct {
+	Assert
+	Value string
+}
+
+func (matcher StringMatcher) isEqualTo(value interface{}) {
+	expected := value.(string)
+	t := matcher.Assert.Test
+	if matcher.Value != expected {
+		t.Fatalf("%v must be equal to %v", matcher.Value, expected)
 	}
 }
