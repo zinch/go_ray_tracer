@@ -2,6 +2,7 @@ package graphics
 
 import (
 	"bufio"
+	"fmt"
 	"io"
 )
 
@@ -36,7 +37,11 @@ func (c *canvas) ToPPM(out io.Writer) (err error) {
 		}
 	}()
 
-	if _, err = writer.WriteString("P3"); err != nil {
+	if _, err = writer.WriteString("P3\n"); err != nil {
+		return err
+	}
+
+	if _, err = writer.WriteString(fmt.Sprintf("%d %d", c.Width, c.Height)); err != nil {
 		return err
 	}
 

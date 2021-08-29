@@ -24,6 +24,7 @@ func Test_saving_in_PPM_format(t *testing.T) {
 	c := graphics.NewCanvas(5, 3)
 	var buf bytes.Buffer
 	c.ToPPM(&buf)
-	expected := `P3`
+	expected := `P3
+5 3`
 	test(t).that(buf.String()).isEqualTo(expected)
 }
