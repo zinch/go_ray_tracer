@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"io"
+	"math"
 )
 
 type canvas struct {
@@ -17,11 +18,11 @@ func NewCanvas(width int, height int) canvas {
 	return canvas{width, height, colors}
 }
 
-func (c *canvas) WritePixel(x int, y int, color Color) {
+func (c *canvas) WritePixel(y int, x int, color Color) {
 	c.colors[c.pixelIndex(x, y)] = color
 }
 
-func (c *canvas) PixelAt(x int, y int) Color {
+func (c *canvas) PixelAt(y int, x int) Color {
 	return c.colors[c.pixelIndex(x, y)]
 }
 
@@ -39,10 +40,34 @@ func (c *canvas) ToPPM(out io.Writer) (err error) {
 
 	header := `P3
 %d %d
-255`
+255
+`
 
 	if _, err = writer.WriteString(fmt.Sprintf(header, c.Width, c.Height)); err != nil {
 		return err
+	}
+
+	cramp := func(x float64) float64 {
+		return math.Min(math.Max(x, 0), 1)
+	}
+
+	formatColor := func(c Color) string {
+		red := int(math.Round(cramp(c.Red()) * 255))
+		green := int(math.Round(cramp(c.Green()) * 255))
+		blue := int(math.Round(cramp(c.Blue()) * 255))
+		return fmt.Sprintf(" %d %d %d", red, green, blue)
+	}
+
+	for x := 0; x < c.Height; x++ {
+		for y := 0; y < c.Width; y++ {
+			color := c.PixelAt(y, x)
+			if _, err = writer.WriteString(formatColor(color)); err != nil {
+				return err
+			}
+		}
+		if _, err = writer.WriteString("\n"); err != nil {
+			return err
+		}
 	}
 
 	return nil
