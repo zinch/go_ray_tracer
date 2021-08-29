@@ -24,12 +24,12 @@ func tick(env Environment, p Projectile) Projectile {
 
 func main() {
 	projectile := Projectile{
-		position: core.Point(0, 1, 0),
-		velocity: core.Vector(1, 1, 0).Normalize(),
+		position: core.NewPoint(0, 1, 0),
+		velocity: core.NewVector(1, 1, 0).Normalize(),
 	}
 	env := Environment{
-		gravity: core.Vector(0, -0.1, 0),
-		wind:    core.Vector(-0.01, 0, 0),
+		gravity: core.NewVector(0, -0.1, 0),
+		wind:    core.NewVector(-0.01, 0, 0),
 	}
 
 	fmt.Println("Launch!")
