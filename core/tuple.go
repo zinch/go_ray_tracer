@@ -37,7 +37,7 @@ func (t Tuple) Minus(other Tuple) Tuple {
 }
 
 func (t Tuple) Negate() Tuple {
-	return Tuple{X: -t.X, Y: -t.Y, Z: -t.Z, W: -t.W}
+	return Tuple{-t.X, -t.Y, -t.Z, -t.W}
 }
 
 func (t Tuple) Multiply(s float64) Tuple {
