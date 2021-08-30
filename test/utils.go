@@ -10,7 +10,7 @@ import (
 	"example.com/ray-tracer/math"
 )
 
-func test(t *testing.T) Assert {
+func With(t *testing.T) Assert {
 	return Assert{Test: t}
 }
 
@@ -20,7 +20,7 @@ type Assert struct {
 
 var tupleType = reflect.TypeOf((*core.Tuple)(nil))
 
-func (assert Assert) that(value interface{}) Matcher {
+func (assert Assert) That(value interface{}) Matcher {
 	if tuple, ok := value.(core.Tuple); ok {
 		return TupleMatcher{Assert: assert, Value: tuple}
 	}
@@ -40,7 +40,7 @@ func (assert Assert) that(value interface{}) Matcher {
 }
 
 type Matcher interface {
-	isEqualTo(value interface{})
+	IsEqualTo(value interface{})
 }
 
 type TupleMatcher struct {
@@ -48,7 +48,7 @@ type TupleMatcher struct {
 	Value core.Tuple
 }
 
-func (matcher TupleMatcher) isEqualTo(value interface{}) {
+func (matcher TupleMatcher) IsEqualTo(value interface{}) {
 	expected := value.(core.Tuple)
 	t := matcher.Assert.Test
 	if !matcher.Value.Equals(expected) {
@@ -61,7 +61,7 @@ type Float64Matcher struct {
 	Value float64
 }
 
-func (matcher Float64Matcher) isEqualTo(value interface{}) {
+func (matcher Float64Matcher) IsEqualTo(value interface{}) {
 	t := matcher.Assert.Test
 	var intVal int
 	var expected float64
@@ -81,7 +81,7 @@ type IntMatcher struct {
 	Value int
 }
 
-func (matcher IntMatcher) isEqualTo(value interface{}) {
+func (matcher IntMatcher) IsEqualTo(value interface{}) {
 	t := matcher.Assert.Test
 	var expected int
 	var ok bool
@@ -98,7 +98,7 @@ type ColorMatcher struct {
 	Value graphics.Color
 }
 
-func (matcher ColorMatcher) isEqualTo(value interface{}) {
+func (matcher ColorMatcher) IsEqualTo(value interface{}) {
 	expected := value.(graphics.Color)
 	t := matcher.Assert.Test
 	if !matcher.Value.Equals(expected) {
@@ -111,7 +111,7 @@ type StringMatcher struct {
 	Value string
 }
 
-func (matcher StringMatcher) isEqualTo(value interface{}) {
+func (matcher StringMatcher) IsEqualTo(value interface{}) {
 	expected := value.(string)
 	t := matcher.Assert.Test
 	if matcher.Value != expected {

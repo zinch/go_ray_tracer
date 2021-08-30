@@ -1,4 +1,4 @@
-package test
+package canvas
 
 import (
 	"bytes"
@@ -6,19 +6,20 @@ import (
 	"testing"
 
 	"example.com/ray-tracer/graphics"
+	"example.com/ray-tracer/test"
 )
 
 func Test_creating_a_canvas(t *testing.T) {
 	c := graphics.NewCanvas(10, 20)
-	test(t).that(c.Width).isEqualTo(10)
-	test(t).that(c.Height).isEqualTo(20)
+	test.With(t).That(c.Width).IsEqualTo(10)
+	test.With(t).That(c.Height).IsEqualTo(20)
 }
 
 func Test_writing_pixels_to_canvas(t *testing.T) {
 	c := graphics.NewCanvas(10, 20)
 	red := graphics.NewColor(1, 0, 0)
 	c.WritePixel(2, 3, red)
-	test(t).that(c.PixelAt(2, 3)).isEqualTo(red)
+	test.With(t).That(c.PixelAt(2, 3)).IsEqualTo(red)
 }
 
 func Test_constructing_the_PPM_header(t *testing.T) {
@@ -29,7 +30,7 @@ func Test_constructing_the_PPM_header(t *testing.T) {
 	expected := `P3
 5 3
 255`
-	test(t).that(header).isEqualTo(expected)
+	test.With(t).That(header).IsEqualTo(expected)
 }
 
 func Test_constructing_the_PPM_pixel_data(t *testing.T) {
@@ -45,5 +46,5 @@ func Test_constructing_the_PPM_pixel_data(t *testing.T) {
  0 0 0 0 0 0 0 128 0 0 0 0 0 0 0
  0 0 0 0 0 0 0 0 0 0 0 0 0 0 255
 `
-	test(t).that(pixelData).isEqualTo(expected)
+	test.With(t).That(pixelData).IsEqualTo(expected)
 }
