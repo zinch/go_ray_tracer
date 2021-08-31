@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"math"
+	"strings"
 )
 
 type canvas struct {
@@ -59,13 +60,13 @@ func (c *canvas) ToPPM(out io.Writer) (err error) {
 	}
 
 	for x := 0; x < c.Height; x++ {
+		var b strings.Builder
 		for y := 0; y < c.Width; y++ {
 			color := c.PixelAt(y, x)
-			if _, err = writer.WriteString(formatColor(color)); err != nil {
-				return err
-			}
+			fmt.Fprint(&b, formatColor(color))
 		}
-		if _, err = writer.WriteString("\n"); err != nil {
+		fmt.Fprintln(&b)
+		if _, err = writer.WriteString(b.String()); err != nil {
 			return err
 		}
 	}
