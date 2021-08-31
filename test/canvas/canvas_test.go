@@ -66,3 +66,11 @@ func Test_splitting_long_lines_in_PPM_files(t *testing.T) {
 153 255 204 153 255 204 153 255 204 153 255 204 153`
 	test.With(t).That(pixelData).IsEqualTo(expected)
 }
+
+func Test_PPM_files_are_terminated_by_a_newline_character(t *testing.T) {
+	c := graphics.NewCanvas(5, 3)
+	var buf bytes.Buffer
+	c.ToPPM(&buf)
+	content := buf.String()
+	test.With(t).That(content[len(content)-1:]).IsEqualTo("\n")
+}
