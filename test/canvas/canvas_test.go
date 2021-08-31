@@ -42,9 +42,9 @@ func Test_constructing_the_PPM_pixel_data(t *testing.T) {
 	c.ToPPM(&buf)
 
 	pixelData := strings.Join(strings.Split(buf.String(), "\n")[3:], "\n")
-	expected := ` 255 0 0 0 0 0 0 0 0 0 0 0 0 0 0
- 0 0 0 0 0 0 0 128 0 0 0 0 0 0 0
- 0 0 0 0 0 0 0 0 0 0 0 0 0 0 255
+	expected := `255 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 128 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 255
 `
 	test.With(t).That(pixelData).IsEqualTo(expected)
 }

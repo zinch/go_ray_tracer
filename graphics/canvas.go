@@ -56,7 +56,7 @@ func (c *canvas) ToPPM(out io.Writer) (err error) {
 		red := int(math.Round(cramp(c.Red()) * 255))
 		green := int(math.Round(cramp(c.Green()) * 255))
 		blue := int(math.Round(cramp(c.Blue()) * 255))
-		return fmt.Sprintf(" %d %d %d", red, green, blue)
+		return fmt.Sprintf("%d %d %d ", red, green, blue)
 	}
 
 	for x := 0; x < c.Height; x++ {
@@ -65,8 +65,9 @@ func (c *canvas) ToPPM(out io.Writer) (err error) {
 			color := c.PixelAt(y, x)
 			fmt.Fprint(&b, formatColor(color))
 		}
-		fmt.Fprintln(&b)
-		if _, err = writer.WriteString(b.String()); err != nil {
+		line := b.String()
+		line = line[:len(line)-1]
+		if _, err = writer.WriteString(fmt.Sprintln(line)); err != nil {
 			return err
 		}
 	}
