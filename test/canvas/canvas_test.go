@@ -48,3 +48,21 @@ func Test_constructing_the_PPM_pixel_data(t *testing.T) {
 `
 	test.With(t).That(pixelData).IsEqualTo(expected)
 }
+
+func Test_splitting_long_lines_in_PPM_files(t *testing.T) {
+	c := graphics.NewCanvas(10, 2)
+	for y := 0; y < 10; y++ {
+		for x := 0; x < 2; x++ {
+			c.WritePixel(y, x, graphics.NewColor(1, 0.8, 0.6))
+		}
+	}
+	var buf bytes.Buffer
+	c.ToPPM(&buf)
+
+	pixelData := strings.Join(strings.Split(buf.String(), "\n")[3:7], "\n")
+	expected := `255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204
+153 255 204 153 255 204 153 255 204 153 255 204 153
+255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204
+153 255 204 153 255 204 153 255 204 153 255 204 153`
+	test.With(t).That(pixelData).IsEqualTo(expected)
+}

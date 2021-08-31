@@ -67,7 +67,23 @@ func (c *canvas) ToPPM(out io.Writer) (err error) {
 		}
 		line := b.String()
 		line = line[:len(line)-1]
-		if _, err = writer.WriteString(fmt.Sprintln(line)); err != nil {
+		chunks := int(math.Ceil(float64(len(line)) / 70))
+
+		lines := make([]string, chunks)
+		if chunks > 1 {
+			sub := line
+			for i := 0; i < chunks-1; i++ {
+				sub = sub[:70]
+				space := strings.LastIndex(sub, " ")
+				lines[i] = sub[:space]
+				sub = line[space+1:]
+			}
+			lines[chunks-1] = sub
+		} else {
+			lines[0] = line
+		}
+
+		if _, err = writer.WriteString(fmt.Sprintln(strings.Join(lines, "\n"))); err != nil {
 			return err
 		}
 	}
